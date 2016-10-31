@@ -84,7 +84,7 @@ static const int kStateKey;
             // is being used to manage subviews
             self.contentSize = [self TPKeyboardAvoiding_calculatedContentSizeFromSubviewFrames];
             
-            if([[self tpKeyboardAvodiginDelegate] respondsToSelector:@selector(scrollViewContentInsetIsUpdated)])
+            if([[self tpKeyboardAvodiginDelegate] respondsToSelector:@selector(scrollViewContentInsetIsUpdated:)])
             {
                 [[self tpKeyboardAvodiginDelegate] scrollViewContentInsetIsUpdated:self];
             }
@@ -130,11 +130,6 @@ static const int kStateKey;
         
         [UIView commitAnimations];
     });
-}
-
-- (void)scrollViewContentInsetIsUpdated
-{
-    
 }
 
 - (void)keyboardViewAppear:(NSString *)animationID context:(void *)context {
