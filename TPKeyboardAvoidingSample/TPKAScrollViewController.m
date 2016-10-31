@@ -85,4 +85,13 @@ static const int kGroupCount = 5;
     return NO;
 }
 
+- (void)scrollViewContentInsetIsUpdatedWhileKeyboardIsOpening:(UIScrollView *)scrollView
+{
+    
+}
+
+- (void)scrollViewContentInsetIsUpdatedWhileKeyboardIsClosing:(UIScrollView *)scrollView
+{
+    
+}
 @end

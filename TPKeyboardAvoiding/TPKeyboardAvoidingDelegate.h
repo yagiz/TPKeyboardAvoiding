@@ -13,6 +13,7 @@
 
 - (BOOL)shouldScrollToFirstResponderWhileKeyboardIsOpening:(UIView*)view;
 - (BOOL)shouldScrollToFirstResponderWhenKeyboardIsOpenned:(UIView*)view;
-- (void)scrollViewContentInsetIsUpdated:(UIScrollView*)scrollView;
+- (void)scrollViewContentInsetIsUpdatedWhileKeyboardIsOpening:(UIScrollView*)scrollView;
+- (void)scrollViewContentInsetIsUpdatedWhileKeyboardIsClosing:(UIScrollView*)scrollView;
 
 @end

@@ -83,11 +83,6 @@ static const int kStateKey;
             // Set the content size, if it's not set. Do not set content size explicitly if auto-layout
             // is being used to manage subviews
             self.contentSize = [self TPKeyboardAvoiding_calculatedContentSizeFromSubviewFrames];
-            
-            if([[self tpKeyboardAvodiginDelegate] respondsToSelector:@selector(scrollViewContentInsetIsUpdated:)])
-            {
-                [[self tpKeyboardAvodiginDelegate] scrollViewContentInsetIsUpdated:self];
-            }
         }
     }
     
@@ -109,6 +104,10 @@ static const int kStateKey;
         [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]];
         
         self.contentInset = [self TPKeyboardAvoiding_contentInsetForKeyboard];
+        if([[self tpKeyboardAvodiginDelegate] respondsToSelector:@selector(scrollViewContentInsetIsUpdatedWhileKeyboardIsOpening:)] && state.keyboardVisible)
+        {
+            [[self tpKeyboardAvodiginDelegate] scrollViewContentInsetIsUpdatedWhileKeyboardIsOpening:self];
+        }
         
         UIView *firstResponder = [self TPKeyboardAvoiding_findFirstResponderBeneathView:self];
         
@@ -175,6 +174,11 @@ static const int kStateKey;
     self.pagingEnabled = state.priorPagingEnabled;
 	[self layoutIfNeeded];
     [UIView commitAnimations];
+    
+    if([[self tpKeyboardAvodiginDelegate] respondsToSelector:@selector(scrollViewContentInsetIsUpdatedWhileKeyboardIsClosing:)])
+    {
+        [[self tpKeyboardAvodiginDelegate] scrollViewContentInsetIsUpdatedWhileKeyboardIsClosing:self];
+    }
 }
 
 - (void)TPKeyboardAvoiding_updateContentInset {
