@@ -71,6 +71,18 @@ static const int kGroupCount = 5;
     [self.scrollView addSubview:button];
     [self.view addConstraints:@[[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeadingMargin multiplier:1 constant:0], [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailingMargin multiplier:1 constant:0]]];
     [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[priorView]-20-[button]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(priorView, button)]];
+    
+    [self.scrollView setKeyboardAvoidingDelegate:self];
+}
+
+- (BOOL)shouldScrollToFirstResponderWhenKeyboardIsOpenned:(UIView *)view
+{
+    return YES;
+}
+
+- (BOOL)shouldScrollToFirstResponderWhileKeyboardIsOpening:(UIView *)view
+{
+    return NO;
 }
 
 @end

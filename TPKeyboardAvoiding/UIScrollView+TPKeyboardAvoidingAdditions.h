@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TPKeyboardAvoidingDelegate.h"
 
 @interface UIScrollView (TPKeyboardAvoidingAdditions)
 - (BOOL)TPKeyboardAvoiding_focusNextTextField;

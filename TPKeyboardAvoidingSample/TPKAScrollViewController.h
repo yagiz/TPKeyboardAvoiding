@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TPKeyboardAvoidingScrollView.h"
 
-@interface TPKAScrollViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@interface TPKAScrollViewController : UIViewController <TPKeyboardAvoidingDelegate>
+
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @end

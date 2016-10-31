@@ -9,6 +9,7 @@
 #import "UIScrollView+TPKeyboardAvoidingAdditions.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import <objc/runtime.h>
+#import "TPKeyboardAvoidingDelegate.h"
 
 static const CGFloat kCalculatedContentPadding = 10;
 static const CGFloat kMinimumScrollOffsetPadding = 20;
@@ -42,6 +43,15 @@ static const int kStateKey;
     return state;
 }
 
+- (id<TPKeyboardAvoidingDelegate>)tpKeyboardAvodiginDelegate
+{
+    if([self respondsToSelector:@selector(keyboardAvoidingDelegate)])
+    {
+        return [self valueForKey:@"keyboardAvoidingDelegate"];
+    }
+    return nil;
+}
+
 - (void)TPKeyboardAvoiding_keyboardWillShow:(NSNotification*)notification {
 
     CGRect keyboardRect = [self convertRect:[[[notification userInfo] objectForKey:_UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:nil];
@@ -73,6 +83,11 @@ static const int kStateKey;
             // Set the content size, if it's not set. Do not set content size explicitly if auto-layout
             // is being used to manage subviews
             self.contentSize = [self TPKeyboardAvoiding_calculatedContentSizeFromSubviewFrames];
+            
+            if([[self tpKeyboardAvodiginDelegate] respondsToSelector:@selector(scrollViewContentInsetIsUpdated)])
+            {
+                [[self tpKeyboardAvodiginDelegate] scrollViewContentInsetIsUpdated:self];
+            }
         }
     }
     
@@ -96,7 +111,13 @@ static const int kStateKey;
         self.contentInset = [self TPKeyboardAvoiding_contentInsetForKeyboard];
         
         UIView *firstResponder = [self TPKeyboardAvoiding_findFirstResponderBeneathView:self];
-        if ( firstResponder ) {
+        
+        BOOL shouldScroll = YES;
+        if([[self tpKeyboardAvodiginDelegate] respondsToSelector:@selector(shouldScrollToFirstResponderWhileKeyboardIsOpening:)])
+        {
+            shouldScroll = [[self tpKeyboardAvodiginDelegate] shouldScrollToFirstResponderWhileKeyboardIsOpening:firstResponder];
+        }
+        if ( firstResponder && shouldScroll) {
             CGFloat viewableHeight = self.bounds.size.height - self.contentInset.top - self.contentInset.bottom;
             [self setContentOffset:CGPointMake(self.contentOffset.x,
                                                [self TPKeyboardAvoiding_idealOffsetForView:firstResponder
@@ -109,6 +130,11 @@ static const int kStateKey;
         
         [UIView commitAnimations];
     });
+}
+
+- (void)scrollViewContentInsetIsUpdated
+{
+    
 }
 
 - (void)keyboardViewAppear:(NSString *)animationID context:(void *)context {

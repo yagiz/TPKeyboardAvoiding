@@ -79,7 +79,22 @@
     
 }
 - (void)scrollToActiveTextField {
-    return [self TPKeyboardAvoiding_scrollToActiveTextField];
+    UIView *firstResponder = [self TPKeyboardAvoiding_findFirstResponderBeneathView:self];
+    if ( !firstResponder ) {
+        return;
+    }
+    
+    BOOL shouldScroll = YES;
+    if([self.keyboardAvoidingDelegate respondsToSelector:@selector(shouldScrollToFirstResponderWhenKeyboardIsOpenned:)])
+    {
+        shouldScroll = [self.keyboardAvoidingDelegate shouldScrollToFirstResponderWhenKeyboardIsOpenned:firstResponder];
+    }
+    
+    if(shouldScroll)
+    {
+        return [self TPKeyboardAvoiding_scrollToActiveTextField];
+    }
+    return;
 }
 
 #pragma mark - Responders, events

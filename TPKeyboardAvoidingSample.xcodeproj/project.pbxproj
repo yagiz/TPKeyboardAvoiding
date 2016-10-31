@@ -56,6 +56,7 @@
 		4C9B0AE11B3CF35400090084 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
 		4C9B0AE21B3CF35400090084 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		4C9B0AE31B3CF35400090084 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		BC4860BF1DC74F8700C530E0 /* TPKeyboardAvoidingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +144,7 @@
 				4C9B0AE11B3CF35400090084 /* TPKeyboardAvoidingTableView.m */,
 				4C9B0AE21B3CF35400090084 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
 				4C9B0AE31B3CF35400090084 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				BC4860BF1DC74F8700C530E0 /* TPKeyboardAvoidingDelegate.h */,
 			);
 			path = TPKeyboardAvoiding;
 			sourceTree = "<group>";
@@ -462,6 +464,7 @@
 				3E081E4E1C0E63A40003DFF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C9B0A941B3CEE6E00090084 /* Build configuration list for PBXProject "TPKeyboardAvoidingSample" */ = {
 			isa = XCConfigurationList;
